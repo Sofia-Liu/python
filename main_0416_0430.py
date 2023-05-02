@@ -103,6 +103,7 @@ def outer(func):
         with open('a.txt', 'a') as file:
             file.write(f"函数名为{var},被调用时间为{start_time}\n")
         return func()
+
     return inner
 
 
@@ -117,6 +118,7 @@ testdecorator()
 # ⽤python 模拟实现 扔1000次硬币，然后分别显示出掷出正⾯和反⾯的次数
 # 提示：
 # 正⾯，反⾯ 可以⽤ 0 或 1 来代替，然后统计 1000次中 1 和 0 出现的次数
+# method 1 : 循环
 def coinplay():
     count_0 = 0
     count_1 = 0
@@ -130,3 +132,58 @@ def coinplay():
 
 
 coinplay()
+
+
+# method 2 ：组合
+class Coin:
+    def __init__(self):
+        pass
+
+    def hand(self):
+        x = random.randint(0, 1)
+        return x
+
+
+class Play:
+    def __init__(self, coin):
+        self.coin = coin
+
+    def play(self):
+        count_0 = 0
+        count_1 = 0
+        while count_0 + count_1 < 1000:
+            x = self.coin.hand()
+            if x == 0:
+                count_0 += 1
+            else:
+                count_1 += 1
+        print(f"1000次中0出现了{count_0}次，1出现了{count_1}次")
+
+
+coin = Coin()
+p = Play(coin)
+p.play()
+
+
+# method 3 ：装饰器
+def outer(func):
+    def inner():
+        count_0 = 0
+        count_1 = 0
+        while count_0 + count_1 < 1000:
+            x = func()
+            if x == 0:
+                count_0 += 1
+            else:
+                count_1 += 1
+        print(f"1000次中0出现了{count_0}次，1出现了{count_1}次")
+
+    return inner
+
+
+@outer
+def func():
+    return random.randint(0, 1)
+
+
+func()

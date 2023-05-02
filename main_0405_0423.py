@@ -43,15 +43,41 @@ def flower():
             print(x)
 
 
-def bublesort(listt):
-    i = 1
-    while i < len(listt):
-        if listt[i - 1] > listt[i]:
-            temp = listt[i]
-            listt[i] = listt[i - 1]
-            listt[i - 1] = temp
-        i += 1
-    # print(listt)
+# ⽤冒泡排序实现 ⼀个⽆序列表的排序
+# 冒泡排序原理：
+# 每⼀趟只能确定将⼀个数归位。即第⼀趟只能确定将末位上的数归位，第⼆趟只能将倒数第
+# 2 位上的数归位，依次类推下去。如果有 n 个数进⾏排序，只需将 n-1 个数归位，也就
+# 是要进⾏ n-1 趟操作。
+# ⽽ “每⼀趟 ” 都需要从第⼀位开始进⾏相邻的两个数的⽐较，将较⼤的数放后⾯，⽐较完毕
+# 之后向后挪⼀位继续⽐较下⾯两个相邻的两个数⼤⼩关系，重复此步骤，直到最后⼀个还没
+# 归位的数。
+def bublesort(lst):
+    lst = [1, 6, 3, 2, 5]
+    for i in range(0, len(lst)):
+        for j in range(1, len(lst) - i):
+            if lst[j - 1] > lst[j]:
+                lst[j - 1], lst[j] = lst[j], lst[j - 1]
+        print(lst)
+
+
+def bubble_sort_v3(array):
+    # 最后一次元素交换的位置
+    last_exchange_index = 0
+    # 无序区的边界
+    sort_boder = len(array) - 1
+    for i in range(len(array) - 1):
+        # 是否有序
+        is_sorted = True
+        for j in range(sort_boder):
+            print(f'{array[j]}  和  {array[j + 1]}进行两两对比')
+            if array[j] > array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
+                is_sorted = False
+                last_exchange_index = j
+        sort_boder = last_exchange_index
+        if is_sorted:
+            break
+        print(f'第{i + 1}轮排序后，列表为 {array}')
 
 
 def get_min():
@@ -74,6 +100,7 @@ if __name__ == '__main__':
     # sum_multi()
     # is_huiwen()
     # flower()
-    # bublesort([1, 3, 2, 5])
+    # bublesort([1, 6, 3, 2, 5])
+    bubble_sort_v3([1, 6, 3, 2, 5])
     # get_min()
-    func(3, 5, 3)
+    # func(3, 5, 3)
