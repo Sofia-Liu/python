@@ -20,10 +20,18 @@ def selsort():
     # i = 1, j = [2, 5]
     # ...
     # i = 5, j = [6, 5]
+    # for i in range(0, len(lst)):
+    #     for j in range(i + 1, len(lst)):
+    #         if lst[j] < lst[i]:
+    #             lst[i], lst[j] = lst[j], lst[i]
+    # 修改后
     for i in range(0, len(lst)):
+        index_min = i
         for j in range(i + 1, len(lst)):
-            if lst[j] < lst[i]:
-                lst[i], lst[j] = lst[j], lst[i]
+            if lst[j] < lst[index_min]:
+                index_min = j
+        if index_min != i:
+            lst[i], lst[index_min] = lst[index_min], lst[i]
     print(f"after:{lst}")
 
 
@@ -97,6 +105,7 @@ def most_str():
 
 most_str()
 
+
 # 实现算法，找出 列表中第⼆⼤的数,
 # 如列表 [3,5,2,8,4,7,9] 第⼆⼤的数是 8
 def sec():
@@ -106,10 +115,27 @@ def sec():
     # print(f"{lst}列表中第二大的数是{lst[1]}")
 
     # method 2
-    lst2 = sorted(lst, reverse=True)
-    print(f"{lst}列表中第二大的数是{lst2[1]}")
+    # lst2 = sorted(lst, reverse=True)
+    # print(f"{lst}列表中第二大的数是{lst2[1]}")
 
+    # 修改后
+    # method 3
+    for i in range(0, len(lst)):
+        index_max = i
+        for j in range(i + 1, len(lst)):
+            if lst[j] > lst[index_max]:
+                lst[index_max], lst[j] = lst[j], lst[index_max]
+        if index_max != i:
+            lst[index_max], lst[i] = lst[i], lst[index_max]
+    print(f"排序后为{lst}，列表中第二大的数是{lst[1]}")
 
-# sec()
+    # method 4
+    # for i in range(0, len(lst)):
+    #     for j in range(1, len(lst) - i):
+    #         if lst[j - 1] < lst[j]:
+    #             lst[j - 1], lst[j] = lst[j], lst[j - 1]
+    # print(f"{lst}列表中第二大的数是{lst[1]}")
+
+sec()
 # ⾃习部分
 # 1. 掌握 python 中的⽂件操作

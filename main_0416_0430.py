@@ -79,17 +79,17 @@ class B(PlayGame):
 # 实例化
 a = A()
 b = B()
-a.fight()
-b.fight()
 
 
-# # 函数调用
-# def choosewho(obj):
-#     obj.fight()
-#
-#
-# choosewho(a)
-# choosewho(b)
+# a.fight()
+# b.fight()
+# 函数调用
+def choosewho(obj):
+    obj.fight()
+
+
+choosewho(a)
+choosewho(b)
 
 
 # 实现⼀个装饰器，每次调⽤函数时，将函数名字 和 调⽤时间写⼊到⽂件 a.txt 中
